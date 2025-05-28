@@ -13,7 +13,7 @@ app.get('/', function (req, res) {
 	res.send('Deployed')
 });
 
-app.use(cors({origin: 'https://create-react-app-latest-version-git-main-sandhu7707s-projects.vercel.app'}))
+app.use(cors({origin: 'https://create-react-app-latest-version.vercel.app'}))
 
 var filesRead = 0;
 const files = ['students.json', 'students2.json', 'students3.json']
