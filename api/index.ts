@@ -36,7 +36,7 @@ function searchStr (nameStr, limit) {
 
     return results;
 }
-
+const fs = require('fs')
 app.get('/fs/search/name/:nameStr/:limit', async(req, res) => {
     let nameStr = req.params.nameStr
     let limit = req.params.limit
