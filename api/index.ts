@@ -37,7 +37,7 @@ function searchStr (nameStr, limit) {
     return results;
 }
 const fs = require('fs').promises;
-app.get('/fs/search/name/:nameStr/:limit', async(req, res) => {
+app.get('/search/name/:nameStr/:limit', async(req, res) => {
     let nameStr = req.params.nameStr
     let limit = req.params.limit
 
@@ -48,36 +48,6 @@ app.get('/fs/search/name/:nameStr/:limit', async(req, res) => {
 
         let data = await fs.readFile(path.join(__dirname, '..', 'components', files[filesRead++]), 'utf8');
         let dataJSON = JSON.parse(data)
-        studentData.push(...dataJSON)
-        results = searchStr(nameStr, limit)
-    }
-
-    res.send(JSON.stringify(results))
-})
-
-app.get('/fetch/search/name/:nameStr/:limit', async(req, res) => {
-    let nameStr = req.params.nameStr
-    let limit = req.params.limit
-
-    let results = searchStr(nameStr, limit)
-
-    while(results.length < limit && filesRead < files.length){
-        console.log(".....loading new file")
-
-        let data = await fetch(path.join(__dirname, '..', 'components', files[filesRead++]))
-        let dataJSON = [];
-        console.log("fetch returned this: ", data);
-        try{
-            console.log("trying data.json(): ")
-            dataJSON = await data.json();
-
-        }
-        catch(err){
-            console.log("got error trying to do data.json(): ", err)
-        }
-
-
-        // let dataJSON = JSON.parse(data)
         studentData.push(...dataJSON)
         results = searchStr(nameStr, limit)
     }
